@@ -1,6 +1,8 @@
 'use strict'
 
  Image.allImage = [];
+ var image = ['img/bag.jpg','img/banana.jpg','img/bathroom.jpg','img/boots.jpg','img/breakfast.jpg','img/bubblegum.jpg','img/chair.jpg','img/cthulhu.jpg','img/dog-duck.jpg','img/dragon.jpg','img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.png', 'img/tauntaun.jpg', 'img/unicorn.jpg','img/usb.gif','img/water-can.jpg','img/wine-glass.jpg']
+var imagesToReader = [];
 
 function Image(name, filepath){
   this.name = name;
@@ -8,26 +10,26 @@ function Image(name, filepath){
   this.clicktotal = 0;
   this.showntotal = 0;
   this.id = ''
+  this.shown = false;
   Image.allImage.push(this);
 }
 
-new Image('bag', 'img/bag.jpg');
-new Image('banana', 'img/banana.jpg');
-new Image('bathroom', 'img/bathroom.jpg');
-new Image('boots', 'img/boots.jpg');
-new Image('breakfast', 'img/breakfast.jpg');
-new Image('bubblegum', 'img/bubblegum.jpg');
-new Image('chair', 'img/chair.jpg');
-new Image('cthulhu', 'img/cthulhu.jpg');
-new Image('dog-duck', 'img/dog-duck.jpg');
-new Image('dragon', 'img/dragon.jpg');
-new Image('pen', 'img/pen.jpg');
-new Image('pet-sweep', 'img/pet-sweep.jpg');
-new Image('scissors', 'img/scissors.jpg');
-new Image('shark', 'img/shark.jpg');
-new Image('sweep', 'img/sweep.png');
-new Image('tauntaun', 'img/tauntaun.jpg');
-new Image('unicorn', 'img/unicorn.jpg');
-new Image('usb', 'img/usb.gif');
-new Image('water-can', 'img/water-can.jpg');
-new Image('wine-glass', 'img/wine-glass.jpg');
+  for (var i = 0; i < image.length; i++) {
+    var namePath = image[i].split('/');
+    var name = namePath[1].split('.')[0];
+    new Image(name, image[i]);
+
+};
+
+function generateThree() {
+  var counter = 0;
+  while(counter < 3){
+    var img = image[Math.floor(Math.random() * 20)];
+    if(!img.shown){
+      imagesToReader.push(img)
+      counter++;
+      img.shown = true;
+      img.showntotal++;
+    }
+  }
+};
