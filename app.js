@@ -42,27 +42,7 @@ function generateThree() {
 
 }
 
-function pushPast(){
-  for(var i = 0; i < imagesToReader.length; i++ ){
-    past.push(imagesToReader[i]);
 
-  }
-  console.log(imagesToReader);
-  console.log(past);
-}
-
-function pickPast(){
-  for(var i = 0; i < past.length; i++){
-    if(imagesToReader[i] === past.length[i]){
-
-      generateThree();
-
-        }
-
-    }
-    console.log(imagesToReader);
-    console.log(past);
-}
 
 function create(){
     random1.setAttribute('src', imagesToReader[0].filepath);
@@ -71,21 +51,35 @@ function create(){
 };
 
 function handleClick(e) {
-  //console.log(e.target.currentSrc.slice(48));
- console.log(e);
-var selection = e.target.currentSrc.slice(52, -4);
-for (var i = 0; i < Image.allImage.length; i++){
-  if(selection === Image.allImage[i].name){
-    Image.allImage[i].shownTotal++
-  }
-}
-totalClick++;
 
-imagesToReader.length = 0;
-pushPast();
-pickPast();
-generateThree();
-create();
+
+  //console.log(e.target.currentSrc.slice(48));
+   // console.log(e);
+  var selection = e.target.currentSrc.slice(52, -4);
+  for (var i = 0; i < Image.allImage.length; i++){
+    if(selection === Image.allImage[i].name){
+      Image.allImage[i].shownTotal++
+    }
+  }
+  totalClick++;
+  console.log(totalClick);
+
+  for(var i = 0; i <Image.allImage.length; i++){
+    var imageAllArray = Image.allImage[i];
+    for(var j = 0; j < imagesToReader.length; j++){
+      var currentReader = imagesToReader[j];
+      if (currentReader.name !== imageAllArray.name){
+        console.log('current reader', currentReader)
+        imageAllArray.shown = false;
+      }
+    }
+  }
+
+  imagesToReader.length = 0;
+  console.log('allimages', Image.allImage)
+
+  generateThree();
+  create();
 }
 
 //Call Action
